@@ -5,7 +5,7 @@ using namespace std;
 Node::Node(int v)
     :val{ v }, weight{ 1 }, lfchild{ nullptr }, rgchild{ nullptr } {
 };
-Node* Node::insertR(int k) {                                 //inserimento ricorsivo
+Node* Node::insertR(int k) {                                 //inserimento ricorsivo NON FUNZIONANTE
     if (this == nullptr) {
         return new Node(val);
     }
@@ -20,6 +20,52 @@ Node* Node::insertR(int k) {                                 //inserimento ricor
         this->rgchild = this->rgchild->insertR(k);
     }
     return this;
+}
+Node* Node::insertI(int k) {                                 //inserimento iterativo
+    Node* current = this;
+    Node* dad{ nullptr };
+    bool is_left;
+    while (current != nullptr) {
+        if (current->val == k) {
+            current->weight++;
+            return this;
+        }
+        if (k < current->val) {
+            dad = current;
+            current = current->lfchild;
+            is_left = true;
+        }
+        else if (k > current->val) {
+            dad = current;
+            current = current->rgchild;
+            is_left = false;
+        }
+    }
+    if (is_left) {
+        dad->lfchild = new Node(k);
+    }
+    else if (!is_left) {
+        dad->rgchild = new Node(k);
+    }
+    return this;
+}
+bool Node::searchR(int k){                     // ricerca ricorsiva
+    bool check;
+    if (this == NULL) {
+        check = false;
+        return check;
+    }
+    if (this->val == k) {
+        check = true; 
+        return check;
+    }
+    if (k < this->val) {
+        check = this->lfchild->searchR(k);
+    }
+    else if (k > this->val) {
+        check = this->rgchild->searchR(k);
+    }
+    return check;
 }
 void Node::preOrder() {                             // cout inOreder ricorsivo
     cout << this->val << " ";
