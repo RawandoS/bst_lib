@@ -3,10 +3,10 @@ using namespace std;
 
 class Node {
 private:
-    int val;
+    int data;
     int weight;
-    Node* lfchild;
-    Node* rgchild;
+    Node* lchild;
+    Node* rchild;
 public:
     Node(int val);
     Node* insertR(int k);

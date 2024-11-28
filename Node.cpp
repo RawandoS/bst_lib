@@ -3,21 +3,21 @@
 using namespace std;
 
 Node::Node(int v)
-    :val{ v }, weight{ 1 }, lfchild{ nullptr }, rgchild{ nullptr } {
+    :data{ v }, weight{ 1 }, lchild{ nullptr }, rchild{ nullptr } {
 };
 Node* Node::insertR(int k) {                                 //inserimento ricorsivo NON FUNZIONANTE
     if (this == nullptr) {
-        return new Node(val);
+        return new Node(k);
     }
-    if (this->val == k) {
+    if (this->data == k) {
         this->weight++;
         return this;
     }
-    if (k < this->val) {
-        this->lfchild = this->lfchild->insertR(k);
+    if (k < this->data) {
+        this->lchild = this->lchild->insertR(k);
     }
-    else if(k > this->val) {
-        this->rgchild = this->rgchild->insertR(k);
+    else if(k > this->data) {
+        this->rchild = this->rchild->insertR(k);
     }
     return this;
 }
@@ -26,26 +26,26 @@ Node* Node::insertI(int k) {                                 //inserimento itera
     Node* dad{ nullptr };
     bool is_left;
     while (current != nullptr) {
-        if (current->val == k) {
+        if (current->data == k) {
             current->weight++;
             return this;
         }
-        if (k < current->val) {
+        if (k < current->data) {
             dad = current;
-            current = current->lfchild;
+            current = current->lchild;
             is_left = true;
         }
-        else if (k > current->val) {
+        else if (k > current->data) {
             dad = current;
-            current = current->rgchild;
+            current = current->rchild;
             is_left = false;
         }
     }
     if (is_left) {
-        dad->lfchild = new Node(k);
+        dad->lchild = new Node(k);
     }
     else if (!is_left) {
-        dad->rgchild = new Node(k);
+        dad->rchild = new Node(k);
     }
     return this;
 }
@@ -55,42 +55,58 @@ bool Node::searchR(int k){                     // ricerca ricorsiva
         check = false;
         return check;
     }
-    if (this->val == k) {
+    if (this->data == k) {
         check = true; 
         return check;
     }
-    if (k < this->val) {
-        check = this->lfchild->searchR(k);
+    if (k < this->data) {
+        check = this->lchild->searchR(k);
     }
-    else if (k > this->val) {
-        check = this->rgchild->searchR(k);
+    else if (k > this->data) {
+        check = this->rchild->searchR(k);
     }
     return check;
 }
-void Node::preOrder() {                             // cout inOreder ricorsivo
-    cout << this->val << " ";
-    if (this->lfchild != nullptr) {
-        this->lfchild->inOrder();
+bool Node::searchI(int k) {                                 //inserimento iterativo
+    bool check{ false };
+    Node* current = this;
+    while (current != nullptr) {
+        if (current->data == k) {
+            return true;
+        }
+        if (k < current->data) {
+            current = current->lchild;
+        }
+        else if (k > current->data) {
+            current = current->rchild;
+        }
     }
-    if (this->rgchild != nullptr) {
-        this->rgchild->inOrder();
+    return false;
+}
+void Node::preOrder() {                             // cout inOreder ricorsivo
+    cout << this->data << " ";
+    if (this->lchild != nullptr) {
+        this->lchild->inOrder();
+    }
+    if (this->rchild != nullptr) {
+        this->rchild->inOrder();
     }
 }
 void Node::inOrder() {                             // cout inOreder ricorsivo
-    if (this->lfchild != nullptr) {
-        this->lfchild->inOrder();
+    if (this->lchild != nullptr) {
+        this->lchild->inOrder();
     }
-    cout << this->val << " ";
-    if (this->rgchild != nullptr) {
-        this->rgchild->inOrder();
+    cout << this->data << " ";
+    if (this->rchild != nullptr) {
+        this->rchild->inOrder();
     }
 }
 void Node::postOrder() {                             // cout inOreder ricorsivo
-    if (this->lfchild != nullptr) {
-        this->lfchild->inOrder();
+    if (this->lchild != nullptr) {
+        this->lchild->inOrder();
     }
-    if (this->rgchild != nullptr) {
-        this->rgchild->inOrder();
+    if (this->rchild != nullptr) {
+        this->rchild->inOrder();
     }
-    cout << this->val << " ";
+    cout << this->data << " ";
 }
