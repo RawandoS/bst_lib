@@ -1,4 +1,5 @@
 #pragma once
+#include <iostream>
 using namespace std;
 
 class Node {
@@ -7,6 +8,8 @@ private:
     int weight;
     Node* lchild;
     Node* rchild;
+    friend ostream& operator<<(ostream& os, Node*p);
+    friend istream& operator>>(istream& is, Node* p);
 public:
     Node(int val);
     Node* insertR(int k);

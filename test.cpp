@@ -12,7 +12,12 @@ int main() {
 	cout << endl;
 	root->postOrder();
 	cout << endl;
-;
+	cout << root;
+	cout << endl;
+	cin >> root;
+	cout << endl;
+	cout << root;
+	cout << endl;
 	if (root->searchI(15)) {
 		cout << "the number was found " << endl;
 	}

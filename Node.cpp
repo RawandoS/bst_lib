@@ -2,6 +2,14 @@
 #include <iostream>
 using namespace std;
 
+ostream& operator<<(ostream& os, Node* p) {
+    os << "Data: " << (*p).data << " | Weight: " << (*p).weight << " | Left Child Data: " << (*p).lchild->data << " | Right Child Data: " << (*p).rchild->data;
+    return os;
+}
+istream& operator>>(istream& is, Node* p) {
+    is >> (*p).data;
+    return is;
+}
 Node::Node(int v)
     :data{ v }, weight{ 1 }, lchild{ nullptr }, rchild{ nullptr } {
 };
