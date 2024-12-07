@@ -5,7 +5,7 @@ using namespace std;
 Node::Node(int v)
     :data{ v }, weight{ 1 }, lchild{ nullptr }, rchild{ nullptr } {
 };
-Node* Node::insertR(int k) {                                 //inserimento ricorsivo NON FUNZIONANTE
+Node* Node::insertR(int k) {                                 //inserimento ricorsivo 
     if (this == nullptr) {
         return new Node(k);
     }
@@ -86,10 +86,10 @@ bool Node::searchI(int k) {                                 //inserimento iterat
 void Node::preOrder() {                             // cout inOreder ricorsivo
     cout << this->data << " ";
     if (this->lchild != nullptr) {
-        this->lchild->inOrder();
+        this->lchild->preOrder();
     }
     if (this->rchild != nullptr) {
-        this->rchild->inOrder();
+        this->rchild->preOrder();
     }
 }
 void Node::inOrder() {                             // cout inOreder ricorsivo
@@ -103,10 +103,10 @@ void Node::inOrder() {                             // cout inOreder ricorsivo
 }
 void Node::postOrder() {                             // cout inOreder ricorsivo
     if (this->lchild != nullptr) {
-        this->lchild->inOrder();
+        this->lchild->postOrder();
     }
     if (this->rchild != nullptr) {
-        this->rchild->inOrder();
+        this->rchild->postOrder();
     }
     cout << this->data << " ";
 }
