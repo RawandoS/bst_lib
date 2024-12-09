@@ -3,15 +3,28 @@
 using namespace std;
 
 ostream& operator<<(ostream& os, Node* p) {
-    os << "Data: " << (*p).data << " | Weight: " << (*p).weight << " | Left Child Data: " << (*p).lchild->data << " | Right Child Data: " << (*p).rchild->data;
+    os << "Data: " << (*p).data << " | Weight: " << (*p).weight;
+    if ((*p).lchild != nullptr) {
+        os << " | Left Child Data: " << (*p).lchild->data;
+    }
+    else if ((*p).rchild != nullptr) {
+        os << " | Right Child Data: " << (*p).rchild->data;
+    }
     return os;
 }
 istream& operator>>(istream& is, Node* p) {
-    is >> (*p).data;
+    int n;
+    is >> n;
+    p->data = n;
+    p->lchild = nullptr;
+    p->rchild = nullptr;
     return is;
 }
 Node::Node(int v)
     :data{ v }, weight{ 1 }, lchild{ nullptr }, rchild{ nullptr } {
+};
+Node::Node()
+    :data{ 0 }, weight{ 1 }, lchild{ nullptr }, rchild{ nullptr } {
 };
 Node* Node::insertR(int k) {                                 //inserimento ricorsivo 
     if (this == nullptr) {
@@ -24,7 +37,7 @@ Node* Node::insertR(int k) {                                 //inserimento ricor
     if (k < this->data) {
         this->lchild = this->lchild->insertR(k);
     }
-    else if(k > this->data) {
+    else if (k > this->data) {
         this->rchild = this->rchild->insertR(k);
     }
     return this;
@@ -57,14 +70,14 @@ Node* Node::insertI(int k) {                                 //inserimento itera
     }
     return this;
 }
-bool Node::searchR(int k){                     // ricerca ricorsiva
+bool Node::searchR(int k) {                     // ricerca ricorsiva
     bool check;
     if (this == NULL) {
         check = false;
         return check;
     }
     if (this->data == k) {
-        check = true; 
+        check = true;
         return check;
     }
     if (k < this->data) {
@@ -117,4 +130,18 @@ void Node::postOrder() {                             // cout inOreder ricorsivo
         this->rchild->postOrder();
     }
     cout << this->data << " ";
+}
+bool Node::isBst() {
+    bool bst{ true };
+    if (this->lchild->data > this->data && this->rchild->data < this->data) {
+        return false;
+    }
+    else if (this->lchild == nullptr && this->rchild == nullptr) {
+        return true;
+    }
+    else if (this->lchild->data < this->data && this->rchild->data > this->data) {
+        bst = this->lchild->isBst();
+        bst = this->rchild->isBst();
+    }
+    return bst;
 }

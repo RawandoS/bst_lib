@@ -14,9 +14,10 @@ int main() {
 	cout << endl;
 	cout << root;
 	cout << endl;
-	cin >> root;
+	Node* r;
+	cin >> r;
 	cout << endl;
-	cout << root;
+	cout << r;
 	cout << endl;
 	if (root->searchI(15)) {
 		cout << "the number was found " << endl;
