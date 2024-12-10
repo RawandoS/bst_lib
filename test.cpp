@@ -12,12 +12,26 @@ int main() {
 	cout << endl;
 	root->postOrder();
 	cout << endl;
-;
-	if (root->searchI(15)) {
+	cout << root;
+	cout << endl;
+	Node* r = new Node();
+	cin >> r;
+	cout << endl;
+	cout << r;
+	cout << endl;
+	if (root->searchR(15)) {
 		cout << "the number was found " << endl;
 	}
 	else {
 		cout << "the number wasn't found  " << endl;
 	}
+	if (root->isBst()) {
+		cout << "is bst" << endl;
+	}
+	else {
+		cout << "isn't bst" << endl;
+	}
+	root = root->deleteNode(84);
+	root->inOrder();
 	return 0;
 }
