@@ -127,3 +127,79 @@ void Node::postOrder() {                             // cout inOreder ricorsivo
     }
     cout << this->data << " ";
 }
+bool Node::isBst() {                               // controllo se è un bst ricorsivo
+    if (this == nullptr) {
+        return true;
+    }
+    if (this->lchild != nullptr && this->lchild->data < this->data) {
+        return this->lchild->isBst();
+    }
+    else if (this->lchild != nullptr && this->lchild->data > this->data) {
+        return false;
+    }
+    if (this->rchild != nullptr && this->rchild->data > this->data) {
+        return this->rchild->isBst();
+    }
+    else if (this->rchild != nullptr && this->rchild->data < this->data) {
+        return false;
+    }
+    return true;
+}
+Node* Node::deleteNode(int k) {
+    Node* smallest{ this };
+    Node* dad{ nullptr };
+    bool is_left;
+    while (smallest != nullptr) {
+        if (smallest->data == k) {
+            break;
+        }
+        if (k < smallest->data) {
+            dad = smallest;
+            smallest = smallest->lchild;
+            is_left = true;
+        }
+        else if (k > smallest->data) {
+            dad = smallest;
+            smallest = smallest->rchild;
+            is_left = false;
+        }
+    }
+    if (smallest->lchild == nullptr && smallest->rchild == nullptr) {
+        if (is_left) {
+            dad->lchild = nullptr;
+        }
+        else {
+            dad->rchild = nullptr;
+        }
+        delete smallest;
+        return this;
+    }
+    else if (smallest->rchild == nullptr && smallest->lchild != nullptr) {
+        smallest->data = smallest->lchild->data;
+        delete smallest->lchild;
+        smallest->lchild = nullptr;
+        return this;
+    }
+    else if (smallest->lchild == nullptr && smallest->rchild != nullptr) {
+        smallest->data = smallest->rchild->data;
+        delete smallest->rchild;
+        smallest->rchild = nullptr;
+        return this;
+    }
+    else if (smallest->lchild != nullptr && smallest->rchild != nullptr) {
+        Node* r = smallest->rchild;
+        Node* r_dad {nullptr};
+        while (r->lchild != nullptr) {
+            r_dad = r;
+            r = r->lchild;
+        }
+        smallest->data = r->data;
+        delete r;
+        r_dad->lchild = nullptr;
+        return this;
+    }
+    else {
+        cout << "ultimo caso" << endl;
+        return this;
+    }
+}

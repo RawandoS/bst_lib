@@ -25,6 +25,13 @@ int main() {
 	else {
 		cout << "the number wasn't found  " << endl;
 	}
+	if (root->isBst()) {
+		cout << "is bst" << endl;
+	}
+	else {
+		cout << "isn't bst" << endl;
+	}
+	root = root->deleteNode(84);
+	root->inOrder();
 	return 0;
-
 }

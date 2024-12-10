@@ -20,6 +20,6 @@ public:
     void inOrder();
     void preOrder();
     void postOrder();
-    //Node* deleteNode(int k);
-    //bool isBst();
+    bool isBst();
+    Node* deleteNode(int k);
 };
