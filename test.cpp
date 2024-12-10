@@ -14,16 +14,17 @@ int main() {
 	cout << endl;
 	cout << root;
 	cout << endl;
-	Node* r;
+	Node* r = new Node();
 	cin >> r;
 	cout << endl;
 	cout << r;
 	cout << endl;
-	if (root->searchI(15)) {
+	if (root->searchR(15)) {
 		cout << "the number was found " << endl;
 	}
 	else {
 		cout << "the number wasn't found  " << endl;
 	}
 	return 0;
+
 }

@@ -21,5 +21,5 @@ public:
     void preOrder();
     void postOrder();
     //Node* deleteNode(int k);
-    bool isBst();
+    //bool isBst();
 };

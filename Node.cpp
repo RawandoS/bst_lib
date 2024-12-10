@@ -7,15 +7,13 @@ ostream& operator<<(ostream& os, Node* p) {
     if ((*p).lchild != nullptr) {
         os << " | Left Child Data: " << (*p).lchild->data;
     }
-    else if ((*p).rchild != nullptr) {
+    if ((*p).rchild != nullptr) {
         os << " | Right Child Data: " << (*p).rchild->data;
     }
     return os;
 }
 istream& operator>>(istream& is, Node* p) {
-    int n;
-    is >> n;
-    p->data = n;
+    is >> p->data;
     p->lchild = nullptr;
     p->rchild = nullptr;
     return is;
@@ -23,9 +21,7 @@ istream& operator>>(istream& is, Node* p) {
 Node::Node(int v)
     :data{ v }, weight{ 1 }, lchild{ nullptr }, rchild{ nullptr } {
 };
-Node::Node()
-    :data{ 0 }, weight{ 1 }, lchild{ nullptr }, rchild{ nullptr } {
-};
+Node::Node() {};
 Node* Node::insertR(int k) {                                 //inserimento ricorsivo 
     if (this == nullptr) {
         return new Node(k);
@@ -72,7 +68,7 @@ Node* Node::insertI(int k) {                                 //inserimento itera
 }
 bool Node::searchR(int k) {                     // ricerca ricorsiva
     bool check;
-    if (this == NULL) {
+    if (this == nullptr) {
         check = false;
         return check;
     }
@@ -130,18 +126,4 @@ void Node::postOrder() {                             // cout inOreder ricorsivo
         this->rchild->postOrder();
     }
     cout << this->data << " ";
-}
-bool Node::isBst() {
-    bool bst{ true };
-    if (this->lchild->data > this->data && this->rchild->data < this->data) {
-        return false;
-    }
-    else if (this->lchild == nullptr && this->rchild == nullptr) {
-        return true;
-    }
-    else if (this->lchild->data < this->data && this->rchild->data > this->data) {
-        bst = this->lchild->isBst();
-        bst = this->rchild->isBst();
-    }
-    return bst;
 }
