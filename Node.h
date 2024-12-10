@@ -16,6 +16,12 @@ public:
     void inOrder();
     void preOrder();
     void postOrder();
+<<<<<<< Updated upstream
     //Node* deleteNode(int k);
     //bool isBst();
 };
+=======
+    bool isBst();
+    Node* deleteNode(int k);
+};
+>>>>>>> Stashed changes
